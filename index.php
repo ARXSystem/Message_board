@@ -49,7 +49,7 @@
     }
 
    
-    $sql = 'SELECT * FROM message_data ORDER BY id';
+    $sql = 'SELECT * FROM message_data ORDER BY created_at';
   
     $statement = $database->query($sql);
    
