@@ -1,17 +1,17 @@
 @charset "UTF-8";
 
-#tab1, #tab2 {
+#tab1, #tab2, #tab3 {
             width: 800px; height: 0px;
             overflow: hidden;
         }
-        #sel1:checked~#tab1, #sel2:checked~#tab2 {
+        #sel1:checked~#tab1, #sel2:checked~#tab2, #sel3:checked~#tab3 {
             height: 800px;
             border: 2px solid black;
         }
         input:checked+label {background-color: skyblue;}
-        #sel1, #sel2 {position: absolute; left: -9999px;}
+        #sel1, #sel2, #sel3 {position: absolute; left: -9999px;}
         label {
-            display: inline-block; width: 200px; text-align: center;
+            display: inline-block; width: 150px; text-align: center;
             padding:10px 0px; border: 3px solid black;
             border-bottom: 0; border-radius: 10px 10px 0 0;
             cursor: pointer; user-select: none;

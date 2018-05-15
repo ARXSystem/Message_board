@@ -70,13 +70,13 @@
      <link rel="stylesheet" href="./CSS/index.css">
 </head>
 <body>
-     
     <input type="radio" name="rad" id="sel1" checked>
     <label for="sel1">Message board</label>
     <input type="radio" name="rad" id="sel2">
     <label for="sel2">New & Delete</label>
+    <input type="radio" name="rad" id="sel3">
+    <label for="sel3">Content</label>
     <div id="tab1">
-        
         <table>
             <tbody>
                 <tr>
@@ -121,8 +121,8 @@
                 </tr>
             </tbody>
         </table>
-        
     </div>
+    
     <div id="tab2">
         <h1>Add the new message</h1>
         <h1><a href="index.php"></a></h1>
@@ -144,6 +144,10 @@
             <input type="text" name="up_message" placeholder="Update the message" required>
             <input type="submit" name="submit_up_message" value="更新"/>
         </form>
+    </div>
+    
+    <div id="tab3">
+        test
     </div>
 </body>
 </html>
