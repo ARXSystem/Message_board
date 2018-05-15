@@ -1,0 +1,6 @@
+CREATE TABLE message_board_DB.message_data (
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY ,
+    message VARCHAR (100),
+    writer VARCHAR(100),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

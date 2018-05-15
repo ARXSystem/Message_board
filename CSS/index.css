@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+#tab1, #tab2 {
+            width: 600px; height: 0px;
+            overflow: hidden;
+        }
+        #sel1:checked~#tab1, #sel2:checked~#tab2 {
+            height: 500px;
+            border: 2px solid black;
+        }
+        input:checked+label {background-color: skyblue;}
+        #sel1, #sel2 {position: absolute; left: -9999px;}
+        label {
+            display: inline-block; width: 150px; text-align: center;
+            padding:10px 0px; border: 3px solid black;
+            border-bottom: 0; border-radius: 10px 10px 0 0;
+            cursor: pointer; user-select: none;
+        }
+        table > tbody > tr:first-child{
+            border-bottom: 1px solid black;
+        }
+        table > tbody > tr {
+            display: block;
+            border-bottom: 1px dotted lightgray;
+        }
+        table > tbody > tr > td {
+            height: 30px; line-height: 30px; text-align: center;
+        }
+        table > tbody > tr > td:nth-child(1) {width: 30px;}
+        table > tbody > tr > td:nth-child(2) {width: 400px;}
+        table > tbody > tr > td:nth-child(3) {width: 90px;}
+        table > tbody > tr > td:nth-child(4) {width: 100px;}
+        table a {color: black; text-decoration: none;}
+        table a:hover {text-decoration: underline;}
+        table {margin: 15px;}
+        table > tbody > tr:last-child > td {height: 50px; line-height: 50px;}
+        table > tbdoy > tr:last-child > td:nth-child(1) {width: 80px;}
+        table > tbdoy > tr:last-child > td:nth-child(2) {width: 400px;}
+        table > tbdoy > tr:last-child > td:nth-child(3) {width: 70px;}
+        table select {height: 25px; display: inline-block;}
+        table input[type="text"] {width: 300px; height: 18px;}
+        table input[type="submit"] {width: 50px; height: 25px;}
+        table > tbody > tr:nth-child(2n) {background-color:rgb(240,240,240);}
+        table > tbody > tr:last-child {border: 0; background-color: white;}
