@@ -33,6 +33,20 @@
    
         $statement = null;
     }
+    
+    if ($_POST['up_message']) {
+        
+        $sql = 'UPDATE message_data SET message=:up_message WHERE message=:ori_message';
+        
+        $statement = $database->prepare($sql);
+        
+        $statement->bindParam(':ori_message', $_POST['ori_message']);
+        $statement->bindParam(':up_message', $_POST['up_message']);
+        
+        $statement->execute();
+      
+        $statement = null;
+    }
 
    
     $sql = 'SELECT * FROM message_data ORDER BY id';
@@ -72,6 +86,7 @@
                     <td>Date</td>
                 </tr>
                 <?php
+                    $numbering=1;
                     if ($records) {
                         foreach ($records as $record) {
                             $id = $record['id'];
@@ -80,7 +95,7 @@
                             $time = $record['created_at'];
                 ?>  
                 <tr>
-                    <td><?php print htmlspecialchars($id, ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php print($numbering);$numbering++; ?></td>
                     <td><a href="#"><?php print htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?></a></td>
                     <td><a href="#"><?php print htmlspecialchars($writer, ENT_QUOTES, 'UTF-8'); ?></a></td>
                     <td><?php print htmlspecialchars($time, ENT_QUOTES, 'UTF-8'); ?></td>
@@ -116,10 +131,18 @@
             <input type="text" name="message" placeholder="write the message" required>
             <input type="submit" name="submit_POST_message" value="登録">
         </form>
+        
         <h1>Delete the message</h1>
         <form action="index.php" method="POST">
             <input type="text" name="del_message" placeholder="delete the message" required>
             <input type="submit" name="submit_del_message" value="消去"/>
+        </form>
+        
+        <h1>Update the message</h1>
+        <form action="index.php" method="POST">
+            <input type="text" name="ori_message" placeholder="Original message" required>
+            <input type="text" name="up_message" placeholder="Update the message" required>
+            <input type="submit" name="submit_up_message" value="更新"/>
         </form>
     </div>
 </body>
