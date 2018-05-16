@@ -3,25 +3,31 @@
     $username = 'root';
     $password = '';
 
-   
     $database = new PDO('mysql:host=localhost;dbname=message_board_DB;charset=UTF8;', $username, $password);
 
+    if ($database == false) {
+        die('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
+    }
 
-    if ($_POST['message']) {
+    if ($_POST['submit_POST_message']) {
+        $file_name = $_FILES['add_image']['name'];
+        $image_path = './uploads/' . $file_name;
+        move_uploaded_file($_FILES['add_image']['tmp_name'], $image_path);
         
-        $sql = 'INSERT INTO message_data (message,writer) VALUES(:message,:writer)';
+        $sql = 'INSERT INTO message_data (message,writer,img_url) VALUES(:message,:writer,:add_image)';
         
         $statement = $database->prepare($sql);
         
         $statement->bindParam(':writer', $_POST['writer']);
         $statement->bindParam(':message', $_POST['message']);
+        $statement->bindParam(':add_image', $image_path);
         
         $statement->execute();
       
         $statement = null;
     }
     
-    if ($_POST['del_message']) {
+    if ($_POST['submit_del_message']) {
         
         $sql = 'DELETE FROM message_data WHERE message=:del_message';
  
@@ -34,7 +40,7 @@
         $statement = null;
     }
     
-    if ($_POST['up_message']) {
+    if ($_POST['submit_up_message']) {
         
         $sql = 'UPDATE message_data SET message=:up_message WHERE message=:ori_message';
         
@@ -126,7 +132,8 @@
     <div id="tab2">
         <h1>Add the new message</h1>
         <h1><a href="index.php"></a></h1>
-        <form action="index.php" method="POST">
+        <form action="index.php" method="POST" enctype="multipart/form-data">
+            <input type="file" name="add_image"><br>
             <input type="text" name="writer"placeholder="write the name" required>
             <input type="text" name="message" placeholder="write the message" required>
             <input type="submit" name="submit_POST_message" value="登録">
@@ -147,7 +154,43 @@
     </div>
     
     <div id="tab3">
-        test
+         <table>
+            <tbody>
+                <tr>
+                    <td>No.</td>
+                    <td>Message</td>
+                    <td>Photo</td>
+                    <td>Writer</td>
+                    <td>Date</td>
+                </tr>
+                <?php
+                    $numbering=1;
+                    if ($records) {
+                        foreach ($records as $record) {
+                            $id = $record['id'];
+                            $message = $record['message'];
+                            $writer = $record['writer'];
+                            $time = $record['created_at'];
+                            $image_url = $record['img_url'];
+                ?>  
+                <tr>
+                    <td><?php print($numbering);$numbering++; ?></td>
+                    <td><?php print htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php
+                        if($image_url!=NULL){
+                            ?><img src="<?php print ($image_url); ?>" width="100px" height="100px" alt=""><?php
+                        }else{
+                            print ("No Image");   
+                        }?></td>
+                    <td><?php print htmlspecialchars($writer, ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php print htmlspecialchars($time, ENT_QUOTES, 'UTF-8'); ?></td>
+                </tr>
+                <?php
+                                                        }
+                                    }
+                ?>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
